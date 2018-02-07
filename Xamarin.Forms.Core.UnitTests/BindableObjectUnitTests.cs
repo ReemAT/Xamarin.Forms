@@ -891,6 +891,21 @@ namespace Xamarin.Forms.Core.UnitTests
 		}
 
 		[Test]
+		public void IsSetIsTrueWhenPropCleared()
+		{
+			string defaultValue = "default";
+			string newValue = "new value";
+
+			var bindableProperty = BindableProperty.Create("Foo", typeof(string), typeof(MockBindable), defaultValue);
+			var bindable = new MockBindable();
+
+			bindable.SetValue(bindableProperty, newValue);
+			bindable.ClearValue(bindableProperty);
+
+			Assert.That(bindable.IsSet(bindableProperty), Is.False);
+		}
+
+		[Test]
 		public void IsSetIsTrueWhenPropSetToDefault()
 		{
 			string defaultValue = "default";
